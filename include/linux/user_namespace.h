@@ -94,8 +94,19 @@ static inline void put_user_ns(struct user_namespace *ns)
 static inline bool userns_may_setgroups(const struct user_namespace *ns)
 {
 	return true;
-}
 #endif
+
+static inline uid_t user_ns_map_uid(struct user_namespace *to,
+	const struct cred *cred, kuid_t uid)
+{
+	return from_kuid_munged(to, uid);
+}
+
+static inline gid_t user_ns_map_gid(struct user_namespace *to,
+	const struct cred *cred, kgid_t gid)
+{
+	return from_kgid_munged(to, gid);
+}
 
 void update_mnt_policy(struct user_namespace *userns);
 
