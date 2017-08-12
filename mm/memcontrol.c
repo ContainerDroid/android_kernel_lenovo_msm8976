@@ -6796,11 +6796,13 @@ static int mem_cgroup_can_attach(struct cgroup *cgroup,
 	return ret;
 }
 
+#if 0
 static int mem_cgroup_allow_attach(struct cgroup *cgroup,
 				   struct cgroup_taskset *tset)
 {
 	return subsys_cgroup_allow_attach(cgroup, tset);
 }
+#endif
 
 static void mem_cgroup_cancel_attach(struct cgroup *cgroup,
 				     struct cgroup_taskset *tset)
@@ -6995,7 +6997,8 @@ static int mem_cgroup_allow_attach(struct cgroup *cgrp,
 		tcred = __task_cred(task);
 
 		if ((current != task) && !capable(CAP_SYS_ADMIN) &&
-		    cred->euid != tcred->uid && cred->euid != tcred->suid)
+		    !uid_eq(cred->euid, tcred->uid) &&
+		    !uid_eq(cred->euid, tcred->suid))
 			return -EACCES;
 	}
 
