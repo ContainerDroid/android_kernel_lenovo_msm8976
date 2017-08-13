@@ -372,6 +372,7 @@ error_put:
 	return ret;
 }
 
+# if 0
 static bool cred_cap_issubset(const struct cred *set, const struct cred *subset)
 {
 	const struct user_namespace *set_ns = set->user_ns;
@@ -396,7 +397,7 @@ static bool cred_cap_issubset(const struct cred *set, const struct cred *subset)
 
 	return false;
 }
-
+#endif
 /**
  * commit_creds - Install new credentials upon the current task
  * @new: The credentials to be assigned

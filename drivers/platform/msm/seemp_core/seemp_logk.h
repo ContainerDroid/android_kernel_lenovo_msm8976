@@ -142,7 +142,7 @@ struct seemp_logk_blk {
 	__u16 len;     /* length of the payload */
 	__u8  version; /* version number */
 	__s32 pid;     /* generating process's pid */
-	__s32 uid;     /* generating process's uid - app specific */
+	kuid_t uid;     /* generating process's uid - app specific */
 	__s32 tid;     /* generating process's tid */
 	__s32 sec;     /* seconds since Epoch */
 	__s32 nsec;    /* nanoseconds */
